@@ -1,5 +1,47 @@
+import json
+
+class NoteManager:
+    def __init__(self):
+        self.notes =[]
+        self.file_name = "notes.json"
+
+    def load_notes(self):
+        try:
+            with open(self.file_name, "r") as file:
+                self.notes = json.load(file)
+        except FileNotFoundError:
+            self.notes = []
+
+    def save_notes(self):
+        with open(self.file_name, "w") as file:
+            json.dump(self.notes, file)
+
+    def add_note(self, note):
+        if not note.strip():
+            print("Note cannot be empty")
+            return
+        self.notes.append(note)
+        print("Note added!")
+
+    def view_notes(self):
+        if not self.notes:
+            print("No notes available!")
+            return
+        
+        for index, note in enumerate(self.notes, start = 1):
+            print(f"{index}. {note}")
+
+    def delete_note(self, index):
+        if 0 <= index < len(self.notes):
+            removed = self.notes.pop(index)
+            print(f"Deleted: {removed}")
+        else:
+            print("Invalid note number!")
+
+    
 def main():
-    notes = []
+    manager = NoteManager()
+    manager.load_notes()
 
     while True:
         print("\n--- Note Manager ---")
@@ -11,42 +53,26 @@ def main():
         choice = input("Choose an option: ")
 
         if choice == "1":
-            note = input("Enter note: ")
-            notes.append(note)
-            print("Note added!")
+            note = input("\nEnter note: ")
+            manager.add_note(note)
 
         elif choice == "2":
-            if not notes:
-                print("No notes available!")
-            else:
-                for i, note in enumerate(notes, start=1):
-                    print(f"{i}. {note}")
+            manager.view_notes()
 
         elif choice == "3":
-            if not notes:
-                print("No notes to delete!")
-            else:
-                for i, note in enumerate(notes, start=1):
-                    print(f"{i}. {note}")
-
-                try:
-                    index = int(input("Enter note number to delete: ")) - 1
-
-                    if 0<= index < len(notes):
-                        deleted = notes.pop(index)
-                        print(f"Deleted: {deleted}")
-                    else:
-                        print("Invalid number!")
-
-                except ValueError:
-                    print("Please enter a valid number!")
+            try:
+                index = int(input("Enter note number to delete: ")) - 1
+                manager.delete_note(index)
+            except ValueError:
+                print("\nPlease enter a valid number!")
 
         elif choice == "4":
-            print("Goodbye!")
+            manager.save_notes()
+            print("\nGoodbye!")
             break
 
         else:
-            print("Invalid choice. Please try again!")
+            print("\nInvalid choice. Please try again!")
 
 if __name__ == "__main__":
     main()
