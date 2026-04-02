@@ -1,24 +1,43 @@
 # CLI Note Manager
 
-A simple command-line note manager built in Python.  
-This project demonstrates core backend concepts such as data persistence, input validation, and structured program design.
+A simple Python command-line application for creating, viewing, and deleting notes with persistent storage.
 
 ## Features
 
-- Add notes
-- View notes
-- Delete notes
-- Persistent storage using JSON
-- Timestamped notes
-- Input validation
-- Error handling
-- Automated tests with pytest
+- Add, view, and delete notes  
+- Persistent storage using JSON  
+- Timestamped notes  
+- Input validation and error handling  
+- Object-oriented design  
+- Modular and testable structure  
 
-## Concepts Demonstrated
+## How to Run
 
-- Object-Oriented Programming (OOP)
-- File handling (read/write)
-- JSON data storage
-- CLI application design
-- Exception handling
-- Unit testing
+```bash
+python main.py
+```
+
+## Example Output
+
+```bash
+--- Note Manager ---
+1. Add Note
+2. View Notes
+3. Delete Note
+4. Exit
+
+Choose an option: 1
+Enter note: Buy groceries
+Note added!
+```
+
+## Tech Used
+
+- Python
+- JSON
+- pytest
+- OOP
+
+## Purpose
+
+This project demonstrates core backend concepts such as data persistence, file handling, and structured application design.
